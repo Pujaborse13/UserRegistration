@@ -3,9 +3,10 @@ import java.util.regex.Pattern;
 
 public class UserRegistration
 {
-    public static boolean isValidEmail(String email) {
-        String regex = "^[a-zA-Z0-9]+([._][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\\.[a-zA-Z]{2,}){1,2}$";
-        return Pattern.matches(regex, email);
+    public static boolean isValidMobileNumber(String mobile) {
+        String regex = "^[0-9]{1,3}\\s[0-9]{10}$";
+        return Pattern.matches(regex, mobile);
+
     }
 
     public static void main(String[] args)
@@ -14,14 +15,15 @@ public class UserRegistration
 
         System.out.println("Welcome to the Git User Registration System!");
 
-        System.out.print("Enter your Email Address: ");
-        String email = scanner.nextLine();
+        System.out.print("Enter your Mobile Number: ");
+        String mobile = scanner.nextLine();
 
-        if (isValidEmail(email)) {
-            System.out.println("Email is valid!");
+        if (isValidMobileNumber(mobile)) {
+            System.out.println("Mobile Number is valid!");
         } else {
-            System.out.println("Invalid Email. Please ensure it follows the format abc.xyz@bl.co.in with proper @ and . positions.");
+            System.out.println("Invalid Mobile Number. Please ensure it follows the format '91 9919819801' with a country code and 10 digits.");
         }
+
 
     }
 }
