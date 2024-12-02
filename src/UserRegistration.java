@@ -9,6 +9,13 @@ public class UserRegistration
         return Pattern.matches(regex, firstName);
     }
 
+    public static boolean isValidLastName(String lastName) {
+        String regex = "^[A-Z][a-zA-Z]{2,}$";
+        return Pattern.matches(regex, lastName);
+    }
+
+
+
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
@@ -26,6 +33,18 @@ public class UserRegistration
             System.out.println("Invalid First Name. Please ensure it starts with a capital letter and has at least 3 characters.");
 
         }
+
+
+        System.out.print("Enter your Last Name: ");
+        String lastName = scanner.nextLine();
+
+
+        if (isValidLastName(lastName)) {
+            System.out.println("Last Name is valid!");
+        } else {
+            System.out.println("Invalid Last Name. Please ensure it starts with a capital letter and has at least 3 characters.");
+        }
+
 
     }
 }
