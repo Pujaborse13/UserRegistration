@@ -19,10 +19,13 @@ public class UserRegistration
 
         if (isValidFirstName(firstName)) {
             System.out.println("First Name is valid!");
-        } else {
-            System.out.println("Invalid First Name. Please ensure it starts with a capital letter and has at least 3 characters.");
         }
 
-        scanner.close();
+        else
+        {
+            System.out.println("Invalid First Name. Please ensure it starts with a capital letter and has at least 3 characters.");
+
+        }
+
     }
 }
