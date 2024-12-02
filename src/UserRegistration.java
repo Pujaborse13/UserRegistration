@@ -4,7 +4,8 @@ import java.util.regex.Pattern;
 public class UserRegistration
 {
     public static boolean isValidPassword(String password) {
-        String regex = "^.{8,}$";
+        String regex = "^(?=.*[A-Z]).{8,}$";
+
         return Pattern.matches(regex, password);
 
 
