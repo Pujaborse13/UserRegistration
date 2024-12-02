@@ -28,8 +28,7 @@ public class UserRegistration
             System.out.println("First Name is valid!");
         }
 
-        else
-        {
+        else {
             System.out.println("Invalid First Name. Please ensure it starts with a capital letter and has at least 3 characters.");
 
         }
@@ -37,7 +36,6 @@ public class UserRegistration
 
         System.out.print("Enter your Last Name: ");
         String lastName = scanner.nextLine();
-
 
         if (isValidLastName(lastName)) {
             System.out.println("Last Name is valid!");
