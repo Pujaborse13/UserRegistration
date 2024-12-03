@@ -5,7 +5,7 @@ public class UserRegistration
 {
     public static boolean isValidPassword(String password)
     {
-        String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>])[a-zA-Z0-9!@#$%^&*(),.?\":{}|<>]{8,}$";
+        String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(w),.?\":{}|<>])[a-zA-Z0-9!@#$%^&*(),.?\":{}|<>]{8,}$";
 
         return Pattern.matches(regex, password);
 
