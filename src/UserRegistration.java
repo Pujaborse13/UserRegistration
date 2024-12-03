@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 public class UserRegistration
 {
     public static boolean isValidPassword(String password) {
-        String regex = "^(?=.*[A-Z])(?=.*\\\\d).{8,}$";
+        String regex = "^(?=.*[A-Z])(?=.*\\d).{8,}$";
 
         return Pattern.matches(regex, password);
 
@@ -22,8 +22,7 @@ public class UserRegistration
         if (isValidPassword(password)) {
             System.out.println("Password is valid!");
         } else {
-            System.out.println("Invalid Password. Please ensure it has a minimum of 8 characters.");
-        }
+            System.out.println("Invalid Password. Ensure it has at least 8 characters, includes one uppercase letter, and has at least one numeric digit.");        }
 
     }
 }
