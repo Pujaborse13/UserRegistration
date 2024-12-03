@@ -1,6 +1,12 @@
 package org.example;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 public class UserValidatorTest {
 
@@ -69,5 +75,47 @@ public class UserValidatorTest {
         assertFalse(UserValidator.isValidPassword("Password@"));
         assertFalse(UserValidator.isValidPassword("Password1"));
         assertFalse(UserValidator.isValidPassword("Pass1@"));
+
     }
-}
+
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "abc@yahoo.com",
+            "abc-100@yahoo.com",
+            "abc.100@yahoo.com",
+            "abc111@abc.com",
+            "abc-100@abc.net",
+            "abc.100@abc.com.au",
+            "abc@1.com",
+            "abc@gmail.com.com",
+            "Abc+100@gmail.com"
+    })
+    void testValidEmails(String email) {
+        assertTrue(UserValidator.isValidEmail(email), "Email should be valid: " + email);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "abc",
+            "abc@.com.my",
+            "abc123@gmail.a",
+            "abc123@.com",
+            "abc123@.com.com",
+            ".abc@abc.com",
+            "abc()*@gmail.com",
+            "abc@%*.com",
+            "abc..2002@gmail.com",
+            "abc.@gmail.com",
+            "abc@abc@gmail.com",
+            "abc@gmail.com.1a"
+    })
+    void testInvalidEmails(String email) {
+        assertFalse(UserValidator.isValidEmail(email), "Email should be invalid: " + email);
+    }
+    }
+
+
+
+
+
