@@ -23,7 +23,7 @@ public class UserRegistration
         if (isValidPassword(password)) {
             System.out.println("Password is valid!");
         } else {
-            System.out.println("Invalid Password. Ensure it has at least 8 characters, includes one uppercase letter, and has at least one numeric digit.");        }
+            System.out.println("Invalid Password. Ensure it has at least 8 characters, includes one uppercase letter, has at least one numeric digit and and exactly one special character..");        }
 
     }
 }
