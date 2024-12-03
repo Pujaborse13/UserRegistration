@@ -10,7 +10,6 @@ public class UserRegistration
         return Pattern.matches(regex, password);
 
     }
-
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
