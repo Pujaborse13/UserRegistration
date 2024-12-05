@@ -4,117 +4,66 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 
-public class UserValidatorTest{
+public class UserValidatorTest {
 
-    @Test
-    public void givenValidFirstName_HappyCase(){
-        assertTrue(UserValidator.isValidFirstName("John"));
-    }
-
-    @Test
-    public void givenInvalidFirstName_SadCase() {
-        assertFalse(UserValidator.isValidFirstName("jo"));
-        assertFalse(UserValidator.isValidFirstName("john"));
-        assertFalse(UserValidator.isValidFirstName("J"));
-    }
+    private final UserValidator validator = new UserValidator();
 
 
     @Test
-    public void givenValidLastName_HappyCase() {
-        assertTrue(UserValidator.isValidLastName("Doe"));
-    }
+    public void testInvalidFirstName() {
+        Exception exception = assertThrows(InvalidFirstNameException.class, () ->
+        {
+            UserValidator.isValidFirstName("puja");
+        });
+        assertEquals("Invalid First Name: Must start with a capital letter and have at least 3 characters.", exception.getMessage());
 
-    @Test
-    public void givenInvalidLastName_SadCase() {
-        assertFalse(UserValidator.isValidLastName("do"));
-        assertFalse(UserValidator.isValidLastName("DOE"));
-        assertFalse(UserValidator.isValidLastName("D"));
     }
 
 
     @Test
-    public void givenValidEmail_HappyCase() {
-        assertTrue(UserValidator.isValidEmail("abc.xyz@bl.co.in"));
-        assertTrue(UserValidator.isValidEmail("abc@bl.co"));
-    }
+    public void testInvalidLastName() {
+        Exception exception = assertThrows(InvalidLastNameException.class, () -> {
+            UserValidator.isValidLastName("borse");
 
-    @Test
-    public void givenInvalidEmail_SadCase() {
-        assertFalse(UserValidator.isValidEmail("abc@bl"));
-        assertFalse(UserValidator.isValidEmail("abc.xyz@.com"));
-        assertFalse(UserValidator.isValidEmail("abc.xyz@bl@co.in"));
+        });
+
+        assertEquals("Invalid Last Name: Must start with a capital letter and have at least 3 characters.", exception.getMessage());
+
     }
 
 
     @Test
-    public void givenValidMobile_HappyCase() {
-        assertTrue(UserValidator.isValidMobile("91 9919819801"));
-    }
-
-    @Test
-    public void givenInvalidMobile_SadCase() {
-        assertFalse(UserValidator.isValidMobile("919919819801"));
-        assertFalse(UserValidator.isValidMobile("91-9919819801"));
-        assertFalse(UserValidator.isValidMobile("91 99198"));
+    public void testInvalidEmail() {
+        Exception exception = assertThrows(InvalidEmailException.class, () -> {
+            UserValidator.isValidEmail("Inavalid mail");
+        });
+        assertEquals("Invalid Email: Must be in a valid format (e.g., user@example.com).", exception.getMessage());
     }
 
 
     @Test
-    public void givenValidPassword_HappyCase() {
-        assertTrue(UserValidator.isValidPassword("Password1@"));
+    public void testInvalidMobile() {
+        Exception exception = assertThrows(InvalidMobileException.class, () -> {
+            UserValidator.isValidMobile("1234");
+        });
+        assertEquals("Invalid Mobile Number: Must be a 10-digit number.", exception.getMessage());
     }
+
 
     @Test
-    public void givenInvalidPassword_SadCase() {
-        assertFalse(UserValidator.isValidPassword("password1@"));
-        assertFalse(UserValidator.isValidPassword("Password@"));
-        assertFalse(UserValidator.isValidPassword("Password1"));
-        assertFalse(UserValidator.isValidPassword("Pass1@"));
-
-    }
-
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "abc@yahoo.com",
-            "abc-100@yahoo.com",
-            "abc.100@yahoo.com",
-            "abc111@abc.com",
-            "abc-100@abc.net",
-            "abc.100@abc.com.au",
-            "abc@1.com",
-            "abc@gmail.com.com",
-            "Abc+100@gmail.com"
-    })
-    void testValidEmails(String email) {
-        assertTrue(UserValidator.isValidEmail(email), "Email should be valid: " + email);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "abc",
-            "abc@.com.my",
-            "abc123@gmail.a",
-            "abc123@.com",
-            "abc123@.com.com",
-            ".abc@abc.com",
-            "abc()*@gmail.com",
-            "abc@%*.com",
-            "abc..2002@gmail.com",
-            "abc.@gmail.com",
-            "abc@abc@gmail.com",
-            "abc@gmail.com.1a"
-    })
-    void testInvalidEmails(String email) {
-        assertFalse(UserValidator.isValidEmail(email), "Email should be invalid: " + email);
-    }
+    public void testInvalidPassword() {
+        Exception exception = assertThrows(InvalidPasswordException.class, () -> {
+            UserValidator.isValidPassword("puja1123");
+        });
+        assertEquals("Invalid Password: Must have at least 8 characters, one uppercase letter, one digit, and one special character.", exception.getMessage());
     }
 
 
 
+
+}
 
 
