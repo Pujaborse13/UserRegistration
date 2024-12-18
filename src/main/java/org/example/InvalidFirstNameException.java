@@ -1,6 +1,6 @@
 package org.example;
 
-public class InvalidFirstNameException extends Exception {
+public class InvalidFirstNameException extends RuntimeException {
     public InvalidFirstNameException(String message) {
         super(message);
     }
@@ -8,7 +8,7 @@ public class InvalidFirstNameException extends Exception {
 }
 
 
- class InvalidLastNameException extends Exception {
+ class InvalidLastNameException extends RuntimeException {
     public InvalidLastNameException(String message) {
         super(message);
     }
@@ -16,7 +16,7 @@ public class InvalidFirstNameException extends Exception {
 }
 
 
-class InvalidEmailException extends Exception {
+class InvalidEmailException extends  RuntimeException {
     public InvalidEmailException(String message) {
         super(message);
     }
@@ -25,13 +25,13 @@ class InvalidEmailException extends Exception {
 
 
 
- class InvalidMobileException extends Exception {
+ class InvalidMobileException extends  RuntimeException{
     public InvalidMobileException(String message) {
         super(message);
     }
 }
 
- class InvalidPasswordException extends Exception {
+ class InvalidPasswordException extends  RuntimeException {
     public InvalidPasswordException(String message) {
         super(message);
     }

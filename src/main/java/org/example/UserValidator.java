@@ -1,45 +1,37 @@
 package org.example;
-import org.omg.CORBA.DynAnyPackage.Invalid;
-
-import java.util.regex.Pattern;
 
 public class UserValidator {
 
+    private static final String VALID_NAME = "^[A-Z][a-z]{2,}$";
+    private static final String VALID_EMAIL = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+    private static final String VALID_MOBILE_NO = "^[0-9]{10}$";
+    private static final String VALID_PASSWORD = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$";
 
 
-    public static void isValidFirstName(String firstName) throws InvalidFirstNameException {
-        if (!firstName.matches("^[A-Z][a-z]{2,}$")) {
-            throw new InvalidFirstNameException("Invalid First Name: Must start with a capital letter and have at least 3 characters.");
+    Validator<String> isValidFirstName = firstName -> firstName.matches(VALID_NAME);
+    Validator<String> isValidLastName = lastName -> lastName.matches(VALID_NAME);
+    Validator<String> isValidEmail = email -> email.matches(VALID_EMAIL);
+    Validator<String> isValidMobile = mobile -> mobile.matches(UserValidator.VALID_MOBILE_NO);
+    Validator<String> isValidPassword = password -> password.matches(UserValidator.VALID_PASSWORD);
 
-        }
-     }
 
-        public static void isValidLastName (String lastName) throws InvalidLastNameException{
-            if (!lastName.matches("^[A-Z][a-z]{2,}$")) {
+        public void validateUserDetails(String firstName, String lastName, String email, String mobile, String password) {
+
+            if (!isValidFirstName.validate(firstName)) {
+                throw new InvalidFirstNameException("Invalid First Name: Must start with a capital letter and have at least 3 characters.");
+            }
+            if (!isValidLastName.validate(lastName)) {
                 throw new InvalidLastNameException("Invalid Last Name: Must start with a capital letter and have at least 3 characters.");
             }
-
-        }
-
-
-        public static void isValidEmail (String email) throws InvalidEmailException {
-            if (!email.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")) {
+            if (!isValidEmail.validate(email)) {
                 throw new InvalidEmailException("Invalid Email: Must be in a valid format (e.g., user@example.com).");
-
-
             }
-
-        }
-            public static void isValidMobile (String mobile) throws InvalidMobileException {
-                if (!mobile.matches("^\\d{10}$")) {
-                    throw new InvalidMobileException("Invalid Mobile Number: Must be a 10-digit number.");
-                }
+            if (!isValidMobile.validate(mobile)) {
+                throw new InvalidMobileException("Invalid Mobile Number: Must be a 10-digit number.");
             }
-
-            public static void isValidPassword (String password) throws InvalidPasswordException {
-                    if (!password.matches("^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$")) {
-                        throw new InvalidPasswordException("Invalid Password: Must have at least 8 characters, one uppercase letter, one digit, and one special character.");
-                    }
-
-                }
+            if (!isValidPassword.validate(password)) {
+                throw new InvalidPasswordException("Invalid Password: Must have at least 8 characters, one uppercase letter, one digit, and one special character.");
+            }
         }
+
+    }
